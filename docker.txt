@@ -1,0 +1,8 @@
+docker run --name mysql-latest  \
+-p 3306:3306 -p 33060:33060  \
+-e MYSQL_ROOT_HOST='%' -e MYSQL_ROOT_PASSWORD='strongpassword'   \
+-d mysql/mysql-server:latest
+
+docker run --name grafana-postgres -p 54320:5432 -e POSTGRES_PASSWORD='strongpassword' postgres:latest
+
+docker run --name grafana-sqlserver -p 1433:1433 -e SA_PASSWORD='Grafana.123' -e ACCEPT_EULA='Y' microsoft/mssql-server-linux:2017-latest
