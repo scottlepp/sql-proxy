@@ -8,8 +8,7 @@ Clone the repo.
 
 ### Prerequisites
 
-Gradle
-Docker
+Install Java, Gradle, and Docker
 
 ### Installing
 
