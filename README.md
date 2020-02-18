@@ -1,6 +1,6 @@
 # SQL Proxy
 
-Allows connecting to an SQL database/datasource over HTTP without the need of drivers.
+Allows connecting to any SQL database/datasource over HTTP without the need of drivers.
 
 ## Getting Started
 
