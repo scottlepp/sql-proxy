@@ -16,16 +16,17 @@ public class Application {
     @Autowired
     private Connector connector;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> test() {
-        Connection conn = new Connection();
-        conn.setType("sqlserver");
-        conn.setHost("localhost");
-        conn.setPort("1433");
-        conn.setUsername("sa");
-        conn.setPassword("Grafana.123");
-        conn.setDatabase("master");
+    public ResponseEntity<String> test(@RequestBody Connection conn) {
+        if (conn.getHost().contains(":")) {
+            String[] hostPort = conn.getHost().split(":");
+            conn.setHost(hostPort[0]);
+            conn.setPort(hostPort[1]);
+        }
+        if (conn.getPort() == null) {
+            conn.setPort("");
+        }
         return connect(conn);
     }
 

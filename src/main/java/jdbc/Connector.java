@@ -41,6 +41,9 @@ public class Connector {
             builder.driverClassName(dbSettings.get("driver"));
             String urlTemplate = dbSettings.get("url");
             String url = MessageFormat.format(urlTemplate, conn.getHost(), conn.getPort(), conn.getDatabase());
+            if (conn.getPort() == "") {
+                url = url.replace(conn.getHost() + ':', conn.getHost());
+            }
             url = url.replace("{user}", conn.getUsername());
             url = url.replace("{password}", conn.getPassword());
             builder.url(url);
