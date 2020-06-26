@@ -12,28 +12,14 @@ Install Java, Gradle, and Docker
 
 ### Installing
 
-Step 1: Build with Gradle
-
+Step 1: Build with build script:
 ```
-./gradlew build && java -jar build/libs/gs-spring-boot-docker-0.1.0.jar   
-```
-
-Step 2: Copy the build libs
-
-```
-mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
+./build.sh
 ```
 
-Step 3. Build the Docker Image 
-
+Step 2: Run the container
 ```
-docker build --build-arg JAR_FILE=build/libs/*.jar -t springio/gs-spring-boot-docker .
-
-```
-
-Step 4: Run the container
-```
-docker run -p 8080:8080 -t springio/gs-spring-boot-docker
+docker run -p 8080:8080 -t gs-springboot-sql-proxy
 ```
 
 ## Development
@@ -42,12 +28,11 @@ Using IntelliJ with Gradle just run the application.
 
 ### Using the Proxy
 
-Step 1:  Connect 
+Step 1:  Connect
 
 * using POSTMAN or CURL (or whatever http client you want)
 
 POST to localhost:8080/connect
-
 ```
 {
  "username": "[database user]",
@@ -71,14 +56,25 @@ Sql Server Example
  "database": "",
 }
 ```
- Step 2: Query
- 
- http://localhost:8080/query?sql=[sql statement]
- 
- Example (sql server):
- 
- http://localhost:8080/query?sql=select * from spt_monitor
- 
+
+Snowflake example:
+```
+curl -XPOST localhost:8080/connect -H 'Content-type: application/json' -d '{"username": "user","password": "password","type": "snowflake","host": "my.db.host","port": "1234","database": "MY_DB"}'
+```
+
+Step 2: Query
+
+http://localhost:8080/query?sql=[sql statement]
+
+Example (sql server):
+
+http://localhost:8080/query?sql=select * from spt_monitor
+
+Example (Snowflake):
+```
+curl -XGET "http://localhost:8080/query?sql=SELECT%20*%20FROM%20mytable;"
+```
+
 ## Deployment
 
 Deploy the container with Docker, Kubernetes, Portainer, etc
@@ -94,7 +90,7 @@ Deploy the container with Docker, Kubernetes, Portainer, etc
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
