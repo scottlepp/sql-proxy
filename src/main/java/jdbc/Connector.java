@@ -44,8 +44,9 @@ public class Connector {
             if (conn.getPort() == "") {
                 url = url.replace(conn.getHost() + ':', conn.getHost());
             }
-            url = url.replace("{user}", conn.getUsername());
-            url = url.replace("{password}", conn.getPassword());
+            url = url.replace("{3}", conn.getUsername());
+            url = url.replace("{4}", conn.getPassword());
+            System.out.println(url);
             builder.url(url);
         } else {
             throw new RuntimeException("Database type  " + type + " not supported");
