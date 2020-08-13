@@ -41,4 +41,5 @@ dependencies {
     compile("com.microsoft.sqlserver:mssql-jdbc")
 //    compile("net.snowflake:snowflake-jdbc")
     compile group: 'net.snowflake', name: 'snowflake-jdbc', version: '3.12.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
