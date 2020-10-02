@@ -6,3 +6,16 @@ docker run --name mysql-latest  \
 docker run --name grafana-postgres -p 54320:5432 -e POSTGRES_PASSWORD='strongpassword' postgres:latest
 
 docker run --name grafana-sqlserver -p 1433:1433 -e SA_PASSWORD='Grafana.123' -e ACCEPT_EULA='Y' microsoft/mssql-server-linux:2017-latest
+
+# release this container to docker hub
+
+# gradle build (run from run config)
+
+# build
+docker build --build-arg DEPENDENCY=build/dependency -t scottlepper/sql-proxy .
+
+#run (to confirm)
+docker run -p 8081:8081 scottlepper/sql-proxy
+
+#push
+docker push scottlepper/sql-proxy

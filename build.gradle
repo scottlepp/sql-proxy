@@ -41,5 +41,7 @@ dependencies {
     compile("com.microsoft.sqlserver:mssql-jdbc")
 //    compile("net.snowflake:snowflake-jdbc")
     compile group: 'net.snowflake', name: 'snowflake-jdbc', version: '3.12.0'
+    compile group: 'com.ibm.db2.jcc', name: 'db2jcc', version: 'db2jcc4'
+//    for local drivers that are not on maven
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
